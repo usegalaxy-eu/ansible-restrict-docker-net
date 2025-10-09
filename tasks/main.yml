@@ -5,6 +5,11 @@
     state: started
     enabled: yes
 
+- name: Flush rules to make behaviour consistent
+  ansible.builtin.iptables:
+    chain: "{{ iptables_chain }}"
+    flush: yes
+
 - name: Allow access to internal network gateways from isolated network
   ansible.builtin.iptables:
     chain: "{{ iptables_chain }}"
