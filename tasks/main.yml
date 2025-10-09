@@ -18,7 +18,7 @@
     destination: "{{ item }}"
     jump: ACCEPT
     comment: "Allow access to internal network gateway {{ item }}"
-  loop: "{{ accepted_internal_ips }}"
+  loop: "{{ accepted_internal_networks }}"
 
 - name: Block access to internal networks from isolated network
   ansible.builtin.iptables:
@@ -28,7 +28,7 @@
     destination: "{{ item }}"
     jump: DROP
     comment: "Block access to internal network {{ item }}"
-  loop: "{{ internal_networks }}"
+  loop: "{{ denied_internal_networks }}"
 
 - name: Insert jump to custom chain in DOCKER-USER
   ansible.builtin.iptables:
