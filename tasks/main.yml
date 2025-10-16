@@ -5,6 +5,11 @@
     state: started
     enabled: yes
 
+- name: Ensure chain exists
+  ansible.builtin.iptables:
+    chain: "{{ iptables_chain }}"
+    chain_management: yes
+
 - name: Flush chain to make table order consistent
   ansible.builtin.iptables:
     chain: "{{ iptables_chain }}"
